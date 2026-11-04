@@ -1,0 +1,24 @@
+/* Design tokens copied from the take-home brief (Envoy design system). Do not edit. */
+:root {
+  --white: #ffffff; --carbon-5: #f6f6f9; --carbon-10: #ebebf0; --carbon-20: #c9cbd4; --carbon-30: #a4a9b6;
+  --carbon-40: #8a8f9e; --carbon-50: #717684; --carbon-70: #3f4450; --carbon-80: #303541; --carbon-90: #1f232d;
+  --gem-5: #f0f4ff; --gem-10: #e0e8ff; --gem-60: #4e4eda; --gem-70: #4141a2;
+  --red-10: #ffe0de; --red-50: #e91c1c; --red-60: #c70a14;
+  --cilantro-10: #c7f5d2; --cilantro-40: #21944e; --cilantro-60: #017939;
+  --papaya-10: #ffe7bd; --papaya-60: #a84f00;
+
+  --background: var(--white); --foreground: var(--carbon-70); --card: var(--white); --subtle: var(--carbon-5);
+  --muted-foreground: var(--carbon-50); --primary: var(--gem-60); --primary-foreground: var(--white);
+  --brand: var(--red-50); --link: var(--gem-60); --ring: var(--carbon-40);
+  --success-foreground: var(--cilantro-60); --warning: var(--papaya-10); --warning-foreground: var(--papaya-60);
+  --danger-foreground: var(--red-60);
+
+  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 6px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / .05);
+  --shadow-md: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+
+  --sans: 'Sofia Pro', Arial, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, Menlo, monospace;
+  --pad: clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}

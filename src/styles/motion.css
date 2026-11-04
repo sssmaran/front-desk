@@ -1,0 +1,73 @@
+/*
+ * Motion: a few deliberate moments only.
+ *  - Filtering, paging and row hovers stay instant (high-frequency, Emil's rule).
+ *  - Account menu + info tip open from their trigger and close faster than they open.
+ *  - Buttons and pills give press feedback.
+ *  - The visits page's headline numbers and chart panel enter once, on first load.
+ * Values follow Emil Kowalski's animation skill and Jakub Krehel's better-ui.
+ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-press: 150ms;
+  --dur-pop-in: 180ms;
+  --dur-pop-out: 120ms;
+  --dur-enter: 300ms;
+}
+
+/* ---------- popovers: account menu + info tip ----------
+   Always in the DOM; data-open toggles them so the CSS transition can reverse mid-way. */
+.account-menu,
+.infotip-bubble {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-pop-out) var(--ease-out),
+    transform var(--dur-pop-out) var(--ease-out),
+    visibility 0s linear var(--dur-pop-out);
+}
+.account-menu { transform: scale(0.97); transform-origin: top right; }
+.infotip-bubble { transform: scale(0.97); transform-origin: top right; }
+
+.account-menu[data-open="true"],
+.infotip-bubble[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--dur-pop-in) var(--ease-out),
+    transform var(--dur-pop-in) var(--ease-out),
+    visibility 0s;
+}
+.account-menu[data-open="true"] { transform: scale(1); }
+.infotip-bubble[data-open="true"] { transform: scale(1); }
+
+.chevron { transition: rotate var(--dur-pop-in) var(--ease-out); }
+.account-trigger[aria-expanded="true"] .chevron { rotate: 180deg; }
+
+/* ---------- press feedback ---------- */
+.btn, .pill, .account-trigger {
+  -webkit-tap-highlight-color: transparent;
+  transition: scale var(--dur-press) ease-out, background-color var(--dur-press) ease, border-color var(--dur-press) ease;
+}
+.btn:not(:disabled):active,
+.pill:active,
+.account-trigger:active { scale: 0.96; }
+
+/* ---------- first-load entrance (runs once per visit to the page) ---------- */
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.enter {
+  animation: enter-up var(--dur-enter) var(--ease-out) both;
+  animation-delay: calc(var(--stagger, 0) * 100ms);
+}
+
+/* ---------- reduced motion: keep the fades, drop movement, scale and blur ---------- */
+@keyframes enter-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .enter { animation: none; }
+  .account-menu, .account-menu[data-open="true"] { transform: none; }
+  .infotip-bubble, .infotip-bubble[data-open="true"] { transform: none; }
+  .btn:not(:disabled):active, .pill:active, .account-trigger:active { scale: none; }
+  .chevron { transition: none; }
+}
