@@ -1,0 +1,13 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+# runtime account storage (passwords hashes) – never commit
+data/
+.DS_Store
+cookies*.txt
+.superpowers/
+# local AI-assistant tooling, not part of the app
+.agents/
+.claude/
+skills-lock.json
