@@ -5,7 +5,7 @@ rules enforced in the API. Next.js (App Router) + TypeScript, one process.
 
 ## Run it
 
-Requires Node 20+.
+Requires Node 20.9.0 or newer (Next.js 16's minimum).
 
 ```sh
 npm install
@@ -59,7 +59,7 @@ signup/login checks the session itself; page guards in the UI are only a conveni
 
 | Method & path            | Who        | Does |
 |--------------------------|------------|------|
-| `POST /api/auth/signup`  | anyone     | `{email, password}` → 201. Email must be on the allowlist (matched trimmed, case-insensitive) else 403. Existing account 409. Password 8–72 chars. Role/name come only from the allowlist. |
+| `POST /api/auth/signup`  | anyone     | `{email, password}` → 201. Email must be on the allowlist (matched trimmed, case-insensitive) else 403. Existing account 409. Password at least 8 characters and at most 72 bytes (bcrypt's limit; accents and emoji use more than one byte). Role/name come only from the allowlist. |
 | `POST /api/auth/login`   | anyone     | `{email, password}` → 200 + cookie + `token`. Wrong details 401. |
 | `POST /api/auth/logout`  | signed in  | Ends the session, 204. |
 | `GET /api/me`            | signed in  | Your email, name, role, and what you may see. |
